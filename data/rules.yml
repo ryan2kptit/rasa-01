@@ -11,3 +11,95 @@ rules:
   steps:
   - intent: bot_challenge
   - action: utter_iamabot
+
+- rule: Handle out of scope queries
+  steps:
+  - intent: out_of_scope
+  - action: utter_out_of_scope
+
+- rule: Ask for crypto type if not provided in transfer
+  condition:
+  - slot_was_set:
+    - crypto_type: null
+  - slot_was_set:
+    - amount: null
+  - slot_was_set:
+    - contact_name: null
+  steps:
+  - intent: transfer_crypto
+  - action: utter_ask_crypto_type
+
+- rule: Ask for amount if not provided in transfer
+  condition:
+  - slot_was_set:
+    - crypto_type: BTC
+  - slot_was_set:
+    - amount: null
+  - slot_was_set:
+    - contact_name: null
+  steps:
+  - intent: inform
+  - action: utter_ask_amount
+
+- rule: Ask for contact if not provided in transfer
+  condition:
+  - slot_was_set:
+    - crypto_type: BTC
+  - slot_was_set:
+    - amount: "100"
+  - slot_was_set:
+    - contact_name: null
+  steps:
+  - intent: inform
+  - action: utter_ask_contact_name
+
+- rule: Ask for crypto type if not provided in buy
+  condition:
+  - slot_was_set:
+    - crypto_type: null
+  - slot_was_set:
+    - amount: null
+  steps:
+  - intent: buy_crypto
+  - action: utter_ask_crypto_type
+
+- rule: Ask for amount if not provided in buy
+  condition:
+  - slot_was_set:
+    - crypto_type: BTC
+  - slot_was_set:
+    - amount: null
+  steps:
+  - intent: inform
+  - action: utter_ask_amount
+
+- rule: Ask for crypto type if not provided in sell
+  condition:
+  - slot_was_set:
+    - crypto_type: null
+  - slot_was_set:
+    - amount: null
+  steps:
+  - intent: sell_crypto
+  - action: utter_ask_crypto_type
+
+- rule: Ask for amount if not provided in sell
+  condition:
+  - slot_was_set:
+    - crypto_type: BTC
+  - slot_was_set:
+    - amount: null
+  steps:
+  - intent: inform
+  - action: utter_ask_amount
+
+- rule: Handle cancel/deny during confirmation
+  steps:
+  - action: utter_confirm_transfer
+  - intent: deny
+  - action: utter_goodbye
+
+- rule: Fallback for unrecognized inputs
+  steps:
+  - intent: nlu_fallback
+  - action: utter_out_of_scope

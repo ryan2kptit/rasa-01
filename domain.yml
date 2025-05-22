@@ -1,33 +1,216 @@
 version: "3.1"
 
 intents:
+  # Basic conversation
   - greet
   - goodbye
   - affirm
   - deny
-  - mood_great
-  - mood_unhappy
   - bot_challenge
+  - out_of_scope
+  
+  # Transfer functions
+  - transfer_crypto
+  - check_balance
+  - ask_transfer_fee
+  - confirm_transfer
+  - cancel_transfer
+  
+  # Buy/Sell functions  
+  - buy_crypto
+  - sell_crypto
+  - check_crypto_price
+  - set_price_alert
+  - ask_market_status
+  
+  # Wallet management
+  - add_contact
+  - view_contacts
+  - check_portfolio
+  - view_transaction_history
+  - ask_wallet_address
+  - edit_contact
+  - delete_contact
+  - search_contact
+  - backup_wallet
+  - restore_wallet
+  - export_transaction_history
+  - set_spending_limit
+  
+  # Security
+  - enable_biometric
+  - change_security_settings
+  - report_suspicious_activity
+
+entities:
+  - crypto_type
+  - amount
+  - contact_name
+  - wallet_address
+  - price
+  - network_type
+  - transaction_id
+
+slots:
+  crypto_type:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: crypto_type
+      
+  amount:
+    type: float
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: amount
+      
+  contact_name:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: contact_name
+      
+  wallet_address:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: wallet_address
+      
+  price:
+    type: float
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: price
+      
+  network_type:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: network_type
+      
+  confirmed:
+    type: bool
+    influence_conversation: true
+    mappings:
+    - type: from_intent
+      intent: affirm
+      value: true
+    - type: from_intent
+      intent: deny
+      value: false
 
 responses:
   utter_greet:
-  - text: "Hey! How are you?"
-
-  utter_cheer_up:
-  - text: "Here is something to cheer you up:"
-    image: "https://i.imgur.com/nGF1K8f.jpg"
-
-  utter_did_that_help:
-  - text: "Did that help you?"
-
-  utter_happy:
-  - text: "Great, carry on!"
+  - text: "Xin chào! Tôi là trợ lý ví crypto của bạn. Tôi có thể giúp bạn chuyển tiền, mua bán crypto và nhiều thứ khác. Bạn cần hỗ trợ gì?"
+  - text: "Chào bạn! Tôi sẵn sàng hỗ trợ các giao dịch crypto của bạn. Bạn muốn làm gì hôm nay?"
 
   utter_goodbye:
-  - text: "Bye"
+  - text: "Tạm biệt! Hẹn gặp lại bạn. Giao dịch an toàn nhé!"
+  - text: "Chào tạm biệt! Chúc bạn đầu tư thành công!"
 
   utter_iamabot:
-  - text: "I am a bot, powered by Rasa."
+  - text: "Tôi là trợ lý AI chuyên về ví tiền điện tử, được phát triển để giúp bạn giao dịch crypto an toàn và tiện lợi."
+
+  utter_ask_crypto_type:
+  - text: "Bạn muốn giao dịch loại crypto nào? (BTC, ETH, BNB, EOS, USDT...)"
+
+  utter_ask_amount:
+  - text: "Bạn muốn giao dịch bao nhiêu?"
+
+  utter_ask_contact_name:
+  - text: "Bạn muốn chuyển cho ai? Tôi có thể tìm trong danh bạ của bạn."
+
+  utter_confirm_transfer:
+  - text: "Xác nhận giao dịch:\n- Số lượng: {amount} {crypto_type}\n- Người nhận: {contact_name}\n- Phí giao dịch: ~$0.15\nBạn có chắc chắn muốn thực hiện?"
+
+  utter_transfer_success:
+  - text: "🎉 Giao dịch thành công! {amount} {crypto_type} đã được chuyển đến {contact_name}."
+
+  utter_buy_success:
+  - text: "✅ Mua thành công {amount} {crypto_type} với giá {price} USDT."
+
+  utter_sell_success:
+  - text: "✅ Bán thành công {amount} {crypto_type} với giá {price} USDT."
+
+  utter_insufficient_balance:
+  - text: "❌ Số dư không đủ. Số dư hiện tại của bạn: {balance} {crypto_type}"
+
+  utter_biometric_required:
+  - text: "🔐 Vui lòng xác thực bằng vân tay hoặc khuôn mặt để tiếp tục."
+
+  utter_price_info:
+  - text: "💰 Giá hiện tại của {crypto_type}: ${price} USDT"
+
+  utter_out_of_scope:
+  - text: "Xin lỗi, tôi chỉ hỗ trợ các vấn đề liên quan đến ví crypto. Bạn có thể hỏi về chuyển tiền, mua bán crypto, kiểm tra số dư..."
+
+  utter_contact_added:
+  - text: "✅ Đã thêm {contact_name} vào danh bạ với địa chỉ {wallet_address}"
+  - text: "🎉 Liên hệ {contact_name} đã được lưu thành công!"
+
+  utter_contact_updated:
+  - text: "✅ Đã cập nhật thông tin của {contact_name}"
+  - text: "🔄 Thông tin liên hệ {contact_name} đã được chỉnh sửa"
+
+  utter_contact_deleted:
+  - text: "🗑️ Đã xóa {contact_name} khỏi danh bạ"
+  - text: "✅ Liên hệ {contact_name} đã được xóa thành công"
+
+  utter_contact_not_found:
+  - text: "❌ Không tìm thấy {contact_name} trong danh bạ"
+  - text: "🔍 Liên hệ {contact_name} không tồn tại"
+
+  utter_wallet_backed_up:
+  - text: "🔐 Ví đã được sao lưu an toàn. Vui lòng bảo quản thông tin backup cẩn thận!"
+  - text: "✅ Backup ví hoàn tất. File backup đã được mã hóa và lưu trữ"
+
+  utter_wallet_restored:
+  - text: "🔄 Ví đã được khôi phục thành công từ backup"
+  - text: "✅ Phục hồi ví hoàn tất. Chào mừng bạn trở lại!"
+
+  utter_export_success:
+  - text: "📊 Lịch sử giao dịch đã được xuất thành công"
+  - text: "✅ File báo cáo đã sẵn sàng để tải xuống"
+
+  utter_limit_set:
+  - text: "🛡️ Đã thiết lập giới hạn chi tiêu: {amount} {crypto_type}"
+  - text: "✅ Hạn mức bảo mật đã được cập nhật"
+
+  utter_ask_contact_action:
+  - text: "Bạn muốn làm gì với liên hệ này? (xem/sửa/xóa)"
+
+  utter_ask_backup_location:
+  - text: "Bạn muốn lưu backup ở đâu? (cloud/local file)"
+
+  utter_ask_limit_amount:
+  - text: "Bạn muốn đặt giới hạn bao nhiêu?"
+
+  utter_wallet_stats:
+  - text: "📈 Thống kê ví:\n💰 Tổng giá trị: ${total_value}\n📊 Số loại crypto: {crypto_count}\n🔄 Giao dịch hôm nay: {daily_transactions}"
+
+actions:
+  - action_check_balance
+  - action_get_crypto_price
+  - action_execute_transfer
+  - action_execute_buy
+  - action_execute_sell
+  - action_search_contact
+  - action_require_biometric
+  - action_check_network_fee
+  - action_validate_wallet_address
+  - action_add_contact
+  - action_edit_contact
+  - action_delete_contact
+  - action_backup_wallet
+  - action_restore_wallet
+  - action_export_history
+  - action_set_spending_limit
 
 session_config:
   session_expiration_time: 60

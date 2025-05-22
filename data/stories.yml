@@ -2,29 +2,363 @@ version: "3.1"
 
 stories:
 
-- story: happy path
+- story: basic greeting
   steps:
   - intent: greet
   - action: utter_greet
-  - intent: mood_great
-  - action: utter_happy
 
-- story: sad path 1
+- story: goodbye
   steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
+  - intent: goodbye  
+  - action: utter_goodbye
+
+- story: simple transfer flow
+  steps:
+  - intent: transfer_crypto
+    entities:
+    - amount: "100"
+    - crypto_type: "USDT"
+    - contact_name: "John"
+  - action: action_check_balance
+  - action: action_search_contact
+  - action: utter_confirm_transfer
   - intent: affirm
-  - action: utter_happy
+  - action: action_require_biometric
+  - action: action_execute_transfer
+  - action: utter_transfer_success
 
-- story: sad path 2
+- story: transfer with insufficient balance
   steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
+  - intent: transfer_crypto
+    entities:
+    - amount: "1000"
+    - crypto_type: "BTC"
+    - contact_name: "Alice"
+  - action: action_check_balance
+  - action: utter_insufficient_balance
+  - intent: check_balance
+  - action: action_check_balance
+
+- story: denied transfer
+  steps:
+  - intent: transfer_crypto
+    entities:
+    - amount: "50"
+    - crypto_type: "ETH"
+    - contact_name: "Bob"
+  - action: action_check_balance
+  - action: action_search_contact
+  - action: utter_confirm_transfer
   - intent: deny
   - action: utter_goodbye
+
+- story: buy crypto flow
+  steps:
+  - intent: buy_crypto
+    entities:
+    - amount: "1"
+    - crypto_type: "BTC"
+  - action: action_get_crypto_price
+  - action: utter_confirm_transfer
+  - intent: affirm
+  - action: action_require_biometric
+  - action: action_execute_buy
+  - action: utter_buy_success
+
+- story: buy crypto with price check
+  steps:
+  - intent: check_crypto_price
+    entities:
+    - crypto_type: "ETH"
+  - action: action_get_crypto_price
+  - action: utter_price_info
+  - intent: buy_crypto
+    entities:
+    - amount: "2"
+    - crypto_type: "ETH"
+  - action: utter_confirm_transfer
+  - intent: affirm
+  - action: action_require_biometric
+  - action: action_execute_buy
+  - action: utter_buy_success
+
+- story: sell crypto flow
+  steps:
+  - intent: sell_crypto
+    entities:
+    - amount: "0.5"
+    - crypto_type: "BTC"
+  - action: action_check_balance
+  - action: action_get_crypto_price
+  - action: utter_confirm_transfer
+  - intent: affirm
+  - action: action_require_biometric
+  - action: action_execute_sell
+  - action: utter_sell_success
+
+- story: check balance
+  steps:
+  - intent: check_balance
+  - action: action_check_balance
+
+- story: check specific crypto balance
+  steps:
+  - intent: check_balance
+    entities:
+    - crypto_type: "BTC"
+  - action: action_check_balance
+
+- story: price inquiry
+  steps:
+  - intent: check_crypto_price
+    entities:
+    - crypto_type: "ETH"
+  - action: action_get_crypto_price
+  - action: utter_price_info
+
+- story: transfer fee inquiry
+  steps:
+  - intent: ask_transfer_fee
+  - action: action_check_network_fee
+
+- story: add contact flow
+  steps:
+  - intent: add_contact
+    entities:
+    - contact_name: "New Friend"
+    - wallet_address: "0x123abc456def"
+  - action: action_validate_wallet_address
+  - action: utter_confirm_transfer
+  - intent: affirm
+  - action: utter_transfer_success
+
+- story: view contacts
+  steps:
+  - intent: view_contacts
+  - action: action_search_contact
+
+- story: check portfolio
+  steps:
+  - intent: check_portfolio
+  - action: action_check_balance
+
+- story: view transaction history
+  steps:
+  - intent: view_transaction_history
+  - action: action_check_balance
+
+- story: comprehensive wallet management flow
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: view_contacts
+  - action: action_search_contact
+  - intent: add_contact
+    entities:
+    - contact_name: "business partner"
+    - wallet_address: "myburner.gm"
+  - action: action_validate_wallet_address
+  - action: utter_confirm_transfer
+  - intent: affirm
+  - action: utter_transfer_success
+  - intent: check_portfolio
+  - action: action_check_balance
+  - intent: view_transaction_history
+  - action: action_check_balance
+  - intent: goodbye
+  - action: utter_goodbye
+
+- story: edit contact information
+  steps:
+  - intent: view_contacts
+  - action: action_search_contact
+  - intent: edit_contact
+    entities:
+    - contact_name: "John"
+  - action: action_search_contact
+  - action: utter_confirm_transfer
+  - intent: affirm
+  - action: utter_transfer_success
+
+- story: search and delete contact
+  steps:
+  - intent: search_contact
+    entities:
+    - contact_name: "old friend"
+  - action: action_search_contact
+  - intent: delete_contact
+    entities:
+    - contact_name: "old friend"
+  - action: utter_confirm_transfer
+  - intent: affirm
+  - action: utter_transfer_success
+
+- story: portfolio analysis workflow
+  steps:
+  - intent: check_portfolio
+  - action: action_check_balance
+  - intent: check_balance
+    entities:
+    - crypto_type: "BTC"
+  - action: action_check_balance
+  - intent: view_transaction_history
+  - action: action_check_balance
+  - intent: export_transaction_history
+  - action: utter_transfer_success
+
+- story: wallet backup and security setup
+  steps:
+  - intent: backup_wallet
+  - action: action_require_biometric
+  - action: utter_transfer_success
+  - intent: set_spending_limit
+    entities:
+    - amount: "1000"
+    - crypto_type: "USDT"
+  - action: utter_confirm_transfer
+  - intent: affirm
+  - action: utter_transfer_success
+
+- story: restore wallet flow
+  steps:
+  - intent: restore_wallet
+  - action: action_require_biometric
+  - action: utter_confirm_transfer
+  - intent: affirm
+  - action: utter_transfer_success
+  - intent: check_portfolio
+  - action: action_check_balance
+
+- story: complex contact management
+  steps:
+  - intent: view_contacts
+  - action: action_search_contact
+  - intent: search_contact
+    entities:
+    - contact_name: "family member"
+  - action: action_search_contact
+  - intent: edit_contact
+    entities:
+    - contact_name: "family member"
+  - action: utter_confirm_transfer
+  - intent: deny
+  - action: utter_goodbye
+  - intent: add_contact
+    entities:
+    - contact_name: "new colleague"
+    - wallet_address: "blockchain.gm"
+  - action: action_validate_wallet_address
+  - action: utter_confirm_transfer
+  - intent: affirm
+  - action: utter_transfer_success
+
+- story: portfolio and transaction analysis
+  steps:
+  - intent: check_portfolio
+  - action: action_check_balance
+  - intent: view_transaction_history
+  - action: action_check_balance
+  - intent: export_transaction_history
+  - action: utter_transfer_success
+  - intent: set_spending_limit
+    entities:
+    - amount: "500"
+    - crypto_type: "ETH"
+  - action: utter_confirm_transfer
+  - intent: affirm
+  - action: utter_transfer_success
+
+- story: wallet security enhancement
+  steps:
+  - intent: backup_wallet
+  - action: action_require_biometric
+  - action: utter_transfer_success
+  - intent: enable_biometric
+  - action: action_require_biometric
+  - intent: set_spending_limit
+    entities:
+    - amount: "2000"
+    - crypto_type: "USDT"
+  - action: utter_confirm_transfer
+  - intent: affirm
+  - action: utter_transfer_success
+  - intent: check_portfolio
+  - action: action_check_balance
+
+- story: bot challenge
+  steps:
+  - intent: bot_challenge
+  - action: utter_iamabot
+
+- story: out of scope
+  steps:
+  - intent: out_of_scope
+  - action: utter_out_of_scope
+
+- story: enable biometric setup
+  steps:
+  - intent: enable_biometric
+  - action: action_require_biometric
+
+- story: wallet address inquiry
+  steps:
+  - intent: ask_wallet_address
+    entities:
+    - crypto_type: "BTC"
+  - action: action_check_balance
+
+- story: complex multi-step transaction
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: check_crypto_price
+    entities:
+    - crypto_type: "BTC"
+  - action: action_get_crypto_price
+  - action: utter_price_info
+  - intent: buy_crypto
+    entities:
+    - amount: "0.1"
+    - crypto_type: "BTC"
+  - action: utter_confirm_transfer
+  - intent: affirm
+  - action: action_require_biometric
+  - action: action_execute_buy
+  - action: utter_buy_success
+  - intent: transfer_crypto
+    entities:
+    - amount: "0.05"
+    - crypto_type: "BTC"
+    - contact_name: "family"
+  - action: action_check_balance
+  - action: action_search_contact
+  - action: utter_confirm_transfer
+  - intent: affirm
+  - action: action_require_biometric
+  - action: action_execute_transfer
+  - action: utter_transfer_success
+  - intent: goodbye
+  - action: utter_goodbye
+
+- story: change mind during transaction
+  steps:
+  - intent: transfer_crypto
+    entities:
+    - amount: "500"
+    - crypto_type: "USDT"
+    - contact_name: "colleague"
+  - action: action_check_balance
+  - action: action_search_contact
+  - action: utter_confirm_transfer
+  - intent: deny
+  - action: utter_goodbye
+  - intent: buy_crypto
+    entities:
+    - amount: "1000"
+    - crypto_type: "USDT"
+  - action: action_get_crypto_price
+  - action: utter_confirm_transfer
+  - intent: affirm
+  - action: action_require_biometric
+  - action: action_execute_buy
+  - action: utter_buy_success

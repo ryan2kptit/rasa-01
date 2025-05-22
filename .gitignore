@@ -1,0 +1,392 @@
+# 🤖 Rasa Crypto Wallet - .gitignore
+
+# =============================================================================
+# RASA SPECIFIC
+# =============================================================================
+
+# Rasa models (large binary files)
+models/
+*.tar.gz
+
+# Rasa cache and temp files
+.rasa/
+.rasa_cache/
+
+# Training results and reports
+results/
+*.json
+*.png
+*.html
+
+# Rasa X database and logs
+rasa.db
+tracker.db
+events.db
+*.db
+*.db-shm
+*.db-wal
+
+# Temporary training files
+tmp*/
+temp*/
+
+# Story graph output
+story_graph.dot
+
+# =============================================================================
+# PYTHON
+# =============================================================================
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+.pybuilder/
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# pipenv
+Pipfile.lock
+
+# poetry
+poetry.lock
+
+# pdm
+.pdm.toml
+
+# PEP 582
+__pypackages__/
+
+# Celery stuff
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# pytype static type analyzer
+.pytype/
+
+# Cython debug symbols
+cython_debug/
+
+# =============================================================================
+# CRYPTO & SECURITY
+# =============================================================================
+
+# API keys and secrets
+*.key
+*.pem
+*.p12
+*.pfx
+secrets.json
+secrets.yml
+secrets.yaml
+.secrets
+config/secrets/
+
+# Wallet files and private keys
+wallet.dat
+*.wallet
+private_keys/
+keystore/
+.ethereum/
+.bitcoin/
+
+# Environment files with sensitive data
+.env.local
+.env.production
+.env.staging
+.env.development
+
+# SSL certificates
+*.crt
+*.cert
+*.cer
+*.ca-bundle
+
+# =============================================================================
+# DATABASE
+# =============================================================================
+
+# SQLite
+*.sqlite
+*.sqlite3
+*.db
+
+# PostgreSQL
+*.sql
+dump.sql
+
+# MongoDB
+*.bson
+
+# =============================================================================
+# LOGS & MONITORING
+# =============================================================================
+
+# Log files
+*.log
+logs/
+log/
+
+# Debug files
+debug/
+*.debug
+
+# Action server logs
+action_server.log
+rasa_server.log
+
+# =============================================================================
+# DEVELOPMENT TOOLS
+# =============================================================================
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.tmp
+*.temp
+Desktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# Linux
+*~
+
+# =============================================================================
+# DOCKER & DEPLOYMENT
+# =============================================================================
+
+# Docker
+.dockerignore
+Dockerfile.prod
+
+# Kubernetes
+*.kubeconfig
+
+# Terraform
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+
+# =============================================================================
+# TESTING & CI/CD
+# =============================================================================
+
+# Test outputs
+test_results/
+test_reports/
+coverage_reports/
+
+# CI/CD artifacts
+.github/workflows/artifacts/
+.gitlab-ci/
+
+# =============================================================================
+# MCP INTEGRATION
+# =============================================================================
+
+# MCP server configs (may contain sensitive data)
+mcp_config/production/
+mcp_secrets/
+
+# MCP client cache
+.mcp_cache/
+
+# Tool execution logs
+tool_logs/
+
+# =============================================================================
+# BACKUP & ARCHIVE
+# =============================================================================
+
+# Backup files
+*.bak
+*.backup
+*.old
+backup/
+backups/
+
+# Archive files
+*.zip
+*.rar
+*.7z
+
+# =============================================================================
+# CUSTOM EXCLUSIONS
+# =============================================================================
+
+# Custom training data (if contains sensitive info)
+# data/custom/
+# data/production/
+
+# User-specific configuration
+user_config.yml
+local_config.yml
+
+# Experimental files
+experiments/
+playground/
+sandbox/
+
+# Documentation builds
+docs/build/
+sphinx/_build/
+
+# =============================================================================
+# KEEP THESE FILES (commented out to ensure they're tracked)
+# =============================================================================
+
+# !config.yml
+# !config_crypto.yml
+# !domain.yml
+# !domain_crypto.yml
+# !endpoints.yml
+# !credentials.yml
+# !data/nlu.yml
+# !data/nlu_crypto.yml
+# !data/stories.yml
+# !data/stories_crypto.yml
+# !data/rules.yml
+# !data/rules_crypto.yml
+# !actions/actions.py
+# !actions/actions_crypto.py
+# !README.md

@@ -3,89 +3,838 @@ version: "3.1"
 nlu:
 - intent: greet
   examples: |
-    - hey
+    - xin chào
+    - chào
     - hello
     - hi
-    - hello there
-    - good morning
-    - good evening
-    - moin
-    - hey there
-    - let's go
-    - hey dude
-    - goodmorning
-    - goodevening
-    - good afternoon
+    - alo
+    - chào buổi sáng
+    - chào buổi chiều
+    - chào bạn
+    - hey
+    - hế lô
+    - xin chào trợ lý
+    - chào ứng dụng
+    - mình cần hỗ trợ
+    - bắt đầu nào
 
 - intent: goodbye
   examples: |
-    - cu
-    - good by
-    - cee you later
-    - good night
+    - tạm biệt
+    - chào
     - bye
     - goodbye
-    - have a nice day
-    - see you around
-    - bye bye
-    - see you later
+    - hẹn gặp lại
+    - cảm ơn và tạm biệt
+    - kết thúc
+    - xong rồi
+    - không cần nữa
+    - cancel
+    - thoát
+    - exit
 
 - intent: affirm
   examples: |
+    - có
+    - đúng
     - yes
-    - y
-    - indeed
-    - of course
-    - that sounds good
-    - correct
+    - ok
+    - okey
+    - được
+    - đồng ý
+    - chắc chắn
+    - xác nhận
+    - đúng rồi
+    - chính xác
+    - oke luôn
+    - YES
+    - vâng
 
-- intent: deny
+- intent: deny  
   examples: |
+    - không
     - no
-    - n
-    - never
-    - I don't think so
-    - don't like that
-    - no way
-    - not really
+    - không đúng
+    - hủy
+    - cancel
+    - từ chối
+    - không muốn
+    - thôi
+    - dừng lại
+    - không cần
+    - sai rồi
+    - không phải
 
-- intent: mood_great
+- intent: transfer_crypto
   examples: |
-    - perfect
-    - great
-    - amazing
-    - feeling like a king
-    - wonderful
-    - I am feeling very good
-    - I am great
-    - I am amazing
-    - I am going to save the world
-    - super stoked
-    - extremely good
-    - so so perfect
-    - so good
-    - so perfect
+    - chuyển [2](amount) [BTC](crypto_type) cho [Nguyễn Văn A](contact_name)
+    - gửi [100](amount) [USDT](crypto_type) đến [mẹ](contact_name)
+    - transfer [0.5](amount) [ETH](crypto_type) to [John](contact_name)
+    - chuyển tiền cho [bạn thân](contact_name)
+    - tôi muốn gửi [50](amount) [BNB](crypto_type) cho [anh Tuấn](contact_name)
+    - chuyển [1000](amount) [EOS](crypto_type) cho [chị Mai](contact_name)
+    - send [10](amount) [LTC](crypto_type) to [brother](contact_name)
+    - gửi crypto cho [gia đình](contact_name)
+    - transfer một ít [BTC](crypto_type) cho [bạn gái](contact_name)
+    - chuyển [20](amount) [USDC](crypto_type) đến [em trai](contact_name)
+    - gửi tiền điện tử cho [partner](contact_name)
+    - tôi cần chuyển [5](amount) [ADA](crypto_type) cho [colleague](contact_name)
+    - chuyển [150](amount) [SOL](crypto_type) cho [teammate](contact_name)
+    - gửi [3](amount) [DOT](crypto_type) đến [roommate](contact_name)
+    - transfer [25](amount) [LINK](crypto_type) to [boss](contact_name)
 
-- intent: mood_unhappy
+- intent: check_balance
   examples: |
-    - my day was horrible
-    - I am sad
-    - I don't feel very well
-    - I am disappointed
-    - super sad
-    - I'm so sad
-    - sad
-    - very sad
-    - unhappy
-    - not good
-    - not very good
-    - extremly sad
-    - so saad
-    - so sad
+    - kiểm tra số dư
+    - xem số dư
+    - check balance
+    - tôi có bao nhiêu [BTC](crypto_type)
+    - số dư [ETH](crypto_type) của tôi
+    - xem ví
+    - kiểm tra ví
+    - balance
+    - số tiền hiện tại
+    - tôi còn bao nhiêu tiền
+    - xem tài khoản
+    - check wallet
+    - số dư ví
+    - tiền trong ví
+    - xem portfolio
+    - tổng tài sản
+
+- intent: buy_crypto
+  examples: |
+    - mua [1](amount) [BTC](crypto_type)
+    - tôi muốn mua [100](amount) [USDT](crypto_type)
+    - buy [0.5](amount) [ETH](crypto_type)
+    - mua crypto
+    - tôi cần mua [50](amount) [BNB](crypto_type) ngay bây giờ
+    - mua [2000](amount) [EOS](crypto_type) với giá [1.2](price) USDT
+    - buy [10](amount) [ADA](crypto_type) at market price
+    - mua [5](amount) [SOL](crypto_type) ở giá [20](price) USD
+    - tôi muốn đầu tư vào [LINK](crypto_type)
+    - mua [1000](amount) [DOGE](crypto_type)
+    - purchase [15](amount) [LTC](crypto_type)
+    - đặt lệnh mua [25](amount) [DOT](crypto_type)
+    - mua [500](amount) [USDC](crypto_type)
+    - tôi cần mua thêm [BTC](crypto_type)
+    - invest in [ETH](crypto_type)
+
+- intent: sell_crypto
+  examples: |
+    - bán [1](amount) [BTC](crypto_type)
+    - tôi muốn bán [100](amount) [USDT](crypto_type)
+    - sell [0.5](amount) [ETH](crypto_type)
+    - bán crypto
+    - tôi cần bán [50](amount) [BNB](crypto_type) ngay
+    - bán [2000](amount) [EOS](crypto_type) với giá [1.5](price) USDT
+    - sell [10](amount) [ADA](crypto_type) at [0.5](price) USD
+    - bán [5](amount) [SOL](crypto_type) ở giá [25](price) USD
+    - tôi muốn thoát [LINK](crypto_type)
+    - bán [1000](amount) [DOGE](crypto_type)
+    - liquidate [15](amount) [LTC](crypto_type)
+    - đặt lệnh bán [25](amount) [DOT](crypto_type)
+    - bán hết [USDC](crypto_type)
+    - tôi cần bán bớt [BTC](crypto_type)
+    - cash out [ETH](crypto_type)
+
+- intent: check_crypto_price  
+  examples: |
+    - giá [BTC](crypto_type) bao nhiêu
+    - [ETH](crypto_type) đang giá mấy
+    - kiểm tra giá [BNB](crypto_type)
+    - price of [USDT](crypto_type)
+    - [EOS](crypto_type) bao nhiêu tiền
+    - giá hiện tại của [ADA](crypto_type)
+    - [SOL](crypto_type) price now
+    - xem giá [LINK](crypto_type)
+    - current price [DOT](crypto_type)
+    - giá thị trường [LTC](crypto_type)
+    - [DOGE](crypto_type) có đắt không
+    - check [USDC](crypto_type) price
+    - giá [BTC](crypto_type) hôm nay
+    - [ETH](crypto_type) tăng hay giảm
+    - market price of [BNB](crypto_type)
+
+- intent: ask_transfer_fee
+  examples: |
+    - phí chuyển tiền bao nhiêu
+    - chi phí transfer
+    - transfer fee
+    - phí giao dịch là gì
+    - tốn phí gì không
+    - gas fee bao nhiêu
+    - network fee
+    - phí mạng [EVM](network_type)
+    - [Bitcoin](network_type) fee
+    - [EOS](network_type) có phí không
+    - transaction cost
+    - chi phí gửi tiền
+    - phí chuyển [BTC](crypto_type)
+    - [ETH](crypto_type) gas price
+
+- intent: add_contact
+  examples: |
+    - thêm địa chỉ ví mới
+    - add contact
+    - lưu liên hệ [Nguyễn Văn A](contact_name)
+    - thêm [John](contact_name) vào danh bạ
+    - save wallet address for [mẹ](contact_name)
+    - tạo liên hệ mới
+    - add [boss](contact_name) wallet
+    - lưu ví của [bạn thân](contact_name)
+    - thêm địa chỉ [0x123abc...](wallet_address) cho [anh Tuấn](contact_name)
+    - save address
+    - create new contact
+    - lưu ví [blockchain.gm](wallet_address) của [em gái](contact_name)
+    - thêm contact [bố](contact_name) với địa chỉ [bitcoin:1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa](wallet_address)
+    - đưa [chị Mai](contact_name) vào list liên hệ
+    - tạo liên hệ cho [teammate](contact_name)
+    - add new wallet [myburner.gm](wallet_address) for [colleague](contact_name)
+    - lưu địa chỉ ví [ETH](crypto_type) của [partner](contact_name)
+    - thêm [cô bạn](contact_name) vào danh sách
+    - save [anh Nam](contact_name) wallet info
+    - tạo contact mới cho [roommate](contact_name)
+    - add [business partner](contact_name) to contacts
+    - lưu ví [BTC](crypto_type) của [uncle](contact_name)
+    - thêm địa chỉ [0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045](wallet_address)
+    - create entry for [family friend](contact_name)
+    - đưa [mentor](contact_name) vào phonebook
+    - save contact info for [investment advisor](contact_name)
+    - thêm [crypto trader](contact_name) với ví [vitalik.eth](wallet_address)
+    - lưu thông tin ví của [business client](contact_name)
+    - add [study group](contact_name) wallet
+    - tạo mục cho [gym buddy](contact_name)
+    - save [neighbor](contact_name) crypto address
+    - thêm ví [USDT](crypto_type) của [freelancer](contact_name)
+    - register [Alex Thompson](contact_name) with address [1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2](wallet_address)
+    - store [Dr. Nguyen](contact_name) wallet information
+    - create contact for [Sarah from accounting](contact_name)
+    - add [my sister](contact_name) to wallet contacts
+    - save [trading partner](contact_name) address [dogecoin:D7YJNjGnhG6L6e4k8BvBMSEYstWetqTFn](wallet_address)
+    - lưu thông tin [chú Ba](contact_name) với ví [Polygon](crypto_type)
+    - thêm [thầy giáo](contact_name) vào danh sách liên hệ
+    - add wallet for [coffee shop owner](contact_name)
+    - tạo entry cho [landlord](contact_name)
+    - save [crypto exchange](contact_name) wallet
+    - thêm [DeFi protocol](contact_name) address
+    - lưu ví [mining pool](contact_name)
+    - add [NFT marketplace](contact_name) to contacts
+    - store [staking provider](contact_name) information
+    - create contact [yield farming](contact_name)
+    - thêm [liquidity provider](contact_name)
+    - save [DAO treasury](contact_name) address
+    - add [multisig wallet](contact_name) contact
+    - lưu [cold storage](contact_name) information
+    - thêm [hardware wallet](contact_name) backup
+    - store [paper wallet](contact_name) details
+    - create [brain wallet](contact_name) entry
+    - add [hot wallet](contact_name) contact
+    - save [custodial service](contact_name) info
+    - thêm [non-custodial](contact_name) wallet
+    - lưu [enterprise wallet](contact_name)
+    - add [institutional](contact_name) contact
+    - store [retail investor](contact_name)
+    - create [whale trader](contact_name) entry
+    - thêm [market maker](contact_name)
+    - save [arbitrage bot](contact_name)
+    - add [flash loan](contact_name) provider
+    - lưu [cross-chain](contact_name) bridge
+    - thêm [layer 2](contact_name) solution
+    - store [sidechain](contact_name) address
+    - create [testnet](contact_name) contact
+    - add [mainnet](contact_name) wallet
+    - save [smart contract](contact_name) address
+    - thêm [token contract](contact_name)
+    - lưu [governance token](contact_name)
+    - add [utility token](contact_name) contact
+    - store [security token](contact_name)
+    - create [privacy coin](contact_name) entry
+    - thêm [meme coin](contact_name) trader
+    - save [altcoin](contact_name) investor
+    - add [Bitcoin maximalist](contact_name)
+    - lưu [Ethereum enthusiast](contact_name)
+    - thêm [Solana developer](contact_name)
+    - store [Cardano supporter](contact_name)
+    - create [Polkadot validator](contact_name)
+    - add [Chainlink oracle](contact_name)
+    - save [Uniswap LP](contact_name) provider
+    - thêm [PancakeSwap](contact_name) farmer
+    - lưu [SushiSwap](contact_name) user
+    - add [Curve Finance](contact_name) contact
+    - store [Aave protocol](contact_name)
+    - create [Compound](contact_name) entry
+    - thêm [MakerDAO](contact_name) vault
+    - save [Synthetix](contact_name) staker
+    - add contact [Lisa Nguyen](contact_name) with [BTC](crypto_type) address
+    - store [Michael Chen](contact_name) [ETH](crypto_type) wallet  
+    - create [Maria Rodriguez](contact_name) [USDT](crypto_type) entry
+    - add [David Kim](contact_name) [BNB](crypto_type) contact
+    - save [Jennifer Wang](contact_name) [ADA](crypto_type) address
+    - store [Robert Martinez](contact_name) [SOL](crypto_type) wallet
+    - create [Emily Davis](contact_name) [DOT](crypto_type) entry
+    - add [James Wilson](contact_name) [LINK](crypto_type) contact
+    - save [Sarah Brown](contact_name) [AVAX](crypto_type) address
+    - store [Christopher Lee](contact_name) [MATIC](crypto_type) wallet
+    - thêm liên hệ [Trần Văn Hùng](contact_name)
+    - lưu thông tin [Lê Thị Lan](contact_name)
+    - tạo contact [Phạm Minh Tuấn](contact_name)
+    - add [Hoàng Thị Mai](contact_name) wallet
+    - save [Vũ Đình Nam](contact_name) address
+    - store [Đặng Thị Hoa](contact_name) info
+    - create [Bùi Văn Đức](contact_name) entry
+    - add [Ngô Thị Linh](contact_name) contact
+    - save [Dương Minh Khoa](contact_name) wallet
+    - store [Lý Thị Trang](contact_name) address
+    - thêm [cryptocurrency exchange Binance](contact_name)
+    - save [DeFi platform Compound](contact_name) 
+    - add [NFT marketplace OpenSea](contact_name)
+    - store [staking service Lido](contact_name)
+    - create [yield farm PancakeSwap](contact_name)
+    - add [DEX Uniswap V3](contact_name) contact
+    - save [lending protocol Aave V2](contact_name)
+    - store [oracle network Chainlink](contact_name)
+    - create [layer 2 Polygon](contact_name) entry
+    - add [cross-chain bridge Multichain](contact_name)
+    - save [wallet service MetaMask](contact_name)
+    - store [custody provider BitGo](contact_name)
+    - create [payment processor BitPay](contact_name)
+    - add [tax service CoinTracker](contact_name)
+    - save [analytics platform DeFiPulse](contact_name)
+
+- intent: view_contacts
+  examples: |
+    - xem danh bạ
+    - view contacts
+    - hiển thị liên hệ
+    - danh sách địa chỉ ví
+    - show contact list
+    - xem danh sách bạn bè
+    - contact book
+    - địa chỉ đã lưu
+    - wallet address book
+    - liên hệ của tôi
+    - show all contacts
+    - hiển thị tất cả liên hệ
+    - xem phonebook
+    - danh sách người nhận
+    - contact directory
+    - list saved wallets
+    - xem các ví đã lưu
+    - all my contacts
+    - người trong danh bạ
+    - display contact list
+    - show address book
+    - liệt kê liên hệ
+    - xem tất cả địa chỉ
+    - my wallet contacts
+    - danh sách bạn bè crypto
+    - contact management
+    - xem contact book
+    - display saved addresses
+    - show crypto contacts
+    - wallet relationship list
+    - xem mọi người trong danh bạ
+    - list all saved contacts
+    - hiển thị directory
+    - contact overview
+    - my address book
+    - show contact database
+    - browse contacts
+    - liệt kê wallet contacts
+    - display address directory
+    - show saved wallets
+    - xem toàn bộ liên hệ
+    - contact repository
+    - address registry
+    - wallet registry
+    - show recipient list
+    - display crypto contacts
+    - liệt kê người nhận
+    - view wallet network
+    - show trusted contacts
+    - display verified addresses
+    - contact portfolio
+    - relationship management
+    - network overview
+    - peer directory
+    - trading partner list
+    - business contact list
+    - family wallet directory
+    - friend address book
+    - professional network
+    - crypto buddy list
+    - DeFi contact list
+    - exchange contact directory
+    - institutional contact list
+    - retail contact directory
+    - whale contact list
+    - validator directory
+    - node operator list
+    - miner contact directory
+    - staker address book
+    - LP provider list
+    - arbitrage partner directory
+    - cross-chain contact list
+    - multi-chain address book
+    - testnet contact directory
+    - mainnet address registry
+    - cold storage directory
+    - hot wallet contact list
+    - hardware wallet registry
+    - software wallet directory
+    - custodial contact list
+    - non-custodial directory
+    - multisig participant list
+    - DAO member directory
+    - governance contact list
+    - protocol contact directory
+    - smart contract registry
+    - token holder directory
+    - NFT collector contact list
+    - gaming wallet directory
+    - metaverse contact list
+    - Web3 address book
+    - blockchain contact directory
+
+- intent: check_portfolio
+  examples: |
+    - xem portfolio
+    - tổng tài sản
+    - my portfolio
+    - xem danh mục đầu tư
+    - total balance
+    - tất cả crypto của tôi
+    - asset overview
+    - wallet summary
+    - investment summary
+    - crypto holdings
+    - hiển thị toàn bộ tài sản
+    - show all my crypto
+    - xem tổng quan đầu tư
+    - portfolio overview
+    - wealth summary
+    - total crypto value
+    - tài sản hiện tại
+    - my investment portfolio
+    - crypto net worth
+    - asset allocation
+    - xem phân bổ tài sản
+    - holdings overview
+    - investment breakdown
+    - tổng giá trị ví
+    - wallet portfolio
+    - crypto investment summary
+    - my digital assets
+    - total cryptocurrency
+    - xem tổng số dư
+    - complete asset view
+    - portfolio performance
+    - my crypto wealth
+    - investment status
+    - crypto balance overview
+    - tài khoản tổng hợp
+    - diversification summary
+    - asset distribution
+    - crypto portfolio analysis
+    - investment positions
+    - tổng quan crypto holdings
+
+- intent: view_transaction_history
+  examples: |
+    - lịch sử giao dịch
+    - transaction history
+    - xem giao dịch cũ
+    - history
+    - các giao dịch trước đó
+    - past transactions
+    - xem lịch sử
+    - transaction log
+    - activity history
+    - previous transfers
+    - show transaction log
+    - hiển thị lịch sử
+    - xem log giao dịch
+    - transaction records
+    - payment history
+    - transfer history
+    - lịch sử chuyển tiền
+    - activity log
+    - transaction timeline
+    - giao dịch đã thực hiện
+    - previous activities
+    - wallet activity
+    - crypto transaction history
+    - lịch sử hoạt động
+    - movement history
+    - past crypto activities
+    - transaction overview
+    - financial history
+    - trading history
+    - lịch sử mua bán
+    - account activity
+    - transaction summary
+    - movement log
+    - transfer log
+    - giao dịch trong quá khứ
+    - activity summary
+    - crypto movements
+    - transaction trail
+    - payment log
+    - operation history
+    - lịch sử hoạt động ví
 
 - intent: bot_challenge
   examples: |
-    - are you a bot?
-    - are you a human?
-    - am I talking to a bot?
-    - am I talking to a human?
+    - bạn là ai
+    - bạn là bot không
+    - you are bot?
+    - are you human
+    - bạn là người hay máy
+    - who are you
+    - what are you
+    - bạn là gì
+    - ai tạo ra bạn
+
+- intent: out_of_scope
+  examples: |
+    - thời tiết hôm nay
+    - tin tức mới nhất
+    - hát một bài
+    - nấu ăn thế nào
+    - có bạn gái chưa
+    - bao nhiêu tuổi
+    - weather today
+    - what's the news
+    - play music
+    - cook something
+    - tell me a joke
+    - làm bài tập toán
+    - phim hay gì không
+    - chơi game
+    - tìm nhà hàng ngon
+
+- intent: enable_biometric
+  examples: |
+    - bật xác thực sinh trắc học
+    - enable biometric
+    - kích hoạt vân tay
+    - fingerprint authentication
+    - face ID setup
+    - thiết lập bảo mật khuôn mặt
+    - enable face recognition
+    - bật xác thực khuôn mặt
+    - activate biometric security
+    - setup fingerprint
+
+- intent: ask_wallet_address
+  examples: |
+    - địa chỉ ví của tôi
+    - my wallet address
+    - wallet address [BTC](crypto_type)
+    - địa chỉ [ETH](crypto_type)
+    - [BNB](crypto_type) address
+    - xem địa chỉ ví
+    - public key
+    - receiving address
+    - deposit address
+    - wallet info
+
+- intent: edit_contact
+  examples: |
+    - sửa thông tin [John](contact_name)
+    - edit contact [mẹ](contact_name)
+    - cập nhật địa chỉ [bạn thân](contact_name)
+    - update [boss](contact_name) wallet
+    - thay đổi thông tin [em gái](contact_name)
+    - modify contact [colleague](contact_name)
+    - chỉnh sửa [anh Nam](contact_name)
+    - change [partner](contact_name) address
+    - update contact info for [family](contact_name)
+    - sửa ví của [roommate](contact_name)
+    - edit wallet address [uncle](contact_name)
+    - cập nhật contact [business client](contact_name)
+    - thay đổi địa chỉ ví [freelancer](contact_name)
+    - modify [study group](contact_name) info
+    - chỉnh sửa thông tin liên hệ [mentor](contact_name)
+    - revise [trading partner](contact_name) details
+    - update [crypto exchange](contact_name) information
+    - modify [DeFi protocol](contact_name) address
+    - change [staking pool](contact_name) details
+    - edit [mining pool](contact_name) contact
+    - update [yield farm](contact_name) info
+    - modify [liquidity provider](contact_name)
+    - change [DAO member](contact_name) details
+    - edit [multisig](contact_name) participant
+    - update [cold storage](contact_name) info
+    - modify [hardware wallet](contact_name)
+    - change [custodial](contact_name) service
+    - edit [institutional](contact_name) contact
+    - update [whale](contact_name) trader info
+    - modify [market maker](contact_name)
+    - change [arbitrage](contact_name) details
+    - edit [flash loan](contact_name) provider
+    - update [cross-chain](contact_name) bridge
+    - modify [layer 2](contact_name) info
+    - change [sidechain](contact_name) details
+    - edit [testnet](contact_name) contact
+    - update [mainnet](contact_name) address
+    - modify [smart contract](contact_name)
+    - change [token](contact_name) details
+    - edit [governance](contact_name) info
+    - update [utility](contact_name) contact
+    - modify [security](contact_name) details
+    - change [privacy](contact_name) mixer
+    - edit [meme coin](contact_name) info
+    - update [altcoin](contact_name) details
+    - modify [Bitcoin](contact_name) contact
+    - change [Ethereum](contact_name) info
+    - edit [Solana](contact_name) details
+    - update [Cardano](contact_name) contact
+    - modify [Polkadot](contact_name) info
+    - change [Chainlink](contact_name) details
+    - edit [Uniswap](contact_name) contact
+    - update [PancakeSwap](contact_name) info
+    - modify [SushiSwap](contact_name) details
+    - change [Curve](contact_name) contact
+    - edit [Aave](contact_name) info
+    - update [Compound](contact_name) details
+    - modify [MakerDAO](contact_name) contact
+    - change [Synthetix](contact_name) info
+    - edit [NFT](contact_name) collector details
+    - update [gaming](contact_name) wallet
+    - modify [metaverse](contact_name) contact
+    - change [Web3](contact_name) details
+    - edit [blockchain](contact_name) address
+
+- intent: delete_contact
+  examples: |
+    - xóa [John](contact_name) khỏi danh bạ
+    - delete contact [ex-colleague](contact_name)
+    - remove [old friend](contact_name)
+    - bỏ [spam contact](contact_name)
+    - xóa liên hệ [fake account](contact_name)
+    - delete [duplicate entry](contact_name)
+    - remove contact [scammer](contact_name)
+    - xóa [outdated contact](contact_name) ra khỏi list
+    - delete wallet [unused address](contact_name)
+    - bỏ [wrong contact](contact_name) đi
+    - remove [suspicious contact](contact_name)
+    - xóa thông tin [no longer needed](contact_name)
+    - delete entry for [unknown person](contact_name)
+    - remove [untrusted contact](contact_name)
+    - clear [test contact](contact_name)
+    - erase [bad actor](contact_name)
+    - purge [malicious contact](contact_name)
+    - eliminate [phishing account](contact_name)
+    - wipe [fraudulent contact](contact_name)
+    - expunge [blacklisted](contact_name) address
+    - unregister [compromised](contact_name) wallet
+    - deregister [hacked](contact_name) account
+    - abolish [risky](contact_name) contact
+    - terminate [dangerous](contact_name) address
+    - cancel [unreliable](contact_name) contact
+    - withdraw [questionable](contact_name) entry
+    - revoke [illegitimate](contact_name) access
+    - nullify [invalid](contact_name) contact
+    - void [incorrect](contact_name) address
+    - dismiss [irrelevant](contact_name) contact
+    - discard [obsolete](contact_name) entry
+    - drop [inactive](contact_name) contact
+    - retire [old](contact_name) address
+    - archive [legacy](contact_name) contact
+    - clean [dirty](contact_name) address
+    - flush [temporary](contact_name) contact
+    - clear [cached](contact_name) entry
+    - reset [broken](contact_name) contact
+    - undo [mistake](contact_name) entry
+    - reverse [accidental](contact_name) addition
+    - backtrack [wrong](contact_name) contact
+    - rollback [erroneous](contact_name) entry
+    - revert [bad](contact_name) addition
+    - fix [incorrect](contact_name) contact
+    - correct [wrong](contact_name) entry
+    - amend [mistaken](contact_name) contact
+    - rectify [error](contact_name) entry
+    - adjust [faulty](contact_name) contact
+    - repair [damaged](contact_name) entry
+    - restore [corrupted](contact_name) contact
+    - recover [lost](contact_name) entry
+    - retrieve [missing](contact_name) contact
+    - reclaim [stolen](contact_name) address
+    - rescue [hijacked](contact_name) contact
+    - salvage [broken](contact_name) entry
+    - preserve [important](contact_name) contact
+    - maintain [critical](contact_name) entry
+    - sustain [vital](contact_name) contact
+    - support [essential](contact_name) entry
+    - uphold [necessary](contact_name) contact
+    - defend [valuable](contact_name) entry
+    - protect [precious](contact_name) contact
+    - secure [sensitive](contact_name) entry
+    - safeguard [confidential](contact_name) contact
+
+- intent: search_contact
+  examples: |
+    - tìm [John](contact_name)
+    - search for [mẹ](contact_name)
+    - find contact [boss](contact_name)
+    - tìm kiếm [bạn thân](contact_name)
+    - locate [family member](contact_name)
+    - search contact [colleague](contact_name)
+    - tìm thông tin [business partner](contact_name)
+    - find [crypto trader](contact_name)
+    - tìm ví của [investment advisor](contact_name)
+    - search for [study group](contact_name)
+    - tìm địa chỉ [mentor](contact_name)
+    - find wallet [roommate](contact_name)
+    - tìm contact [gym buddy](contact_name)
+    - search [neighbor](contact_name) address
+    - locate contact [freelancer](contact_name)
+    - lookup [Sarah Johnson](contact_name)
+    - browse for [team lead](contact_name)
+    - filter contacts by [family](contact_name)
+    - search wallet for [Alex](contact_name)
+    - tìm kiếm ví [chị Hạnh](contact_name)
+    - locate address for [Dr. Smith](contact_name)
+    - find entry [trading bot](contact_name)
+    - search directory [mining pool](contact_name)
+    - lookup wallet [exchange](contact_name)
+    - browse [DeFi protocol](contact_name)
+    - filter [staking service](contact_name)
+    - search [liquidity provider](contact_name)
+    - find [yield farm](contact_name) contact
+    - locate [DAO treasury](contact_name)
+    - lookup [multisig wallet](contact_name)
+    - search [cold storage](contact_name)
+    - find [hardware wallet](contact_name)
+    - browse [custodial service](contact_name)
+    - filter [institutional](contact_name) contacts
+    - search [whale trader](contact_name)
+    - lookup [market maker](contact_name)
+    - find [arbitrage bot](contact_name)
+    - locate [flash loan](contact_name) provider
+    - search [cross-chain](contact_name) bridge
+    - find [layer 2](contact_name) solution
+    - lookup [sidechain](contact_name) validator
+    - browse [testnet](contact_name) contacts
+    - filter [mainnet](contact_name) addresses
+    - search [smart contract](contact_name)
+    - find [token contract](contact_name)
+    - locate [governance](contact_name) wallet
+    - lookup [utility token](contact_name)
+    - search [security token](contact_name)
+    - find [privacy coin](contact_name) mixer
+    - browse [meme coin](contact_name) community
+    - filter [altcoin](contact_name) projects
+    - search [Bitcoin](contact_name) supporters
+    - find [Ethereum](contact_name) developers
+    - locate [Solana](contact_name) builders
+    - lookup [Cardano](contact_name) stake pools
+    - search [Polkadot](contact_name) parachains
+    - find [Chainlink](contact_name) oracles
+    - browse [Uniswap](contact_name) LPs
+    - filter [PancakeSwap](contact_name) farmers
+    - search [SushiSwap](contact_name) users
+    - find [Curve](contact_name) liquidity
+    - locate [Aave](contact_name) borrowers
+    - lookup [Compound](contact_name) lenders
+    - search [MakerDAO](contact_name) vaults
+    - find [Synthetix](contact_name) stakers
+    - browse [NFT](contact_name) collectors
+    - filter [gaming](contact_name) wallets
+    - search [metaverse](contact_name) users
+    - find [Web3](contact_name) contacts
+    - locate [blockchain](contact_name) addresses
+
+- intent: backup_wallet
+  examples: |
+    - backup ví
+    - sao lưu ví
+    - backup wallet
+    - tạo bản sao lưu
+    - export wallet
+    - save wallet backup
+    - backup private keys
+    - sao lưu seed phrase
+    - create wallet backup
+    - backup recovery phrase
+    - lưu trữ ví an toàn
+    - export wallet data
+    - backup crypto wallet
+    - tạo file backup
+    - save recovery information
+    - backup wallet file
+    - sao lưu dữ liệu ví
+    - create backup copy
+    - export keys
+    - backup my wallet
+
+- intent: restore_wallet
+  examples: |
+    - restore ví
+    - khôi phục ví
+    - restore wallet
+    - import wallet
+    - phục hồi ví từ backup
+    - restore from backup
+    - import from seed phrase
+    - khôi phục từ recovery phrase
+    - restore wallet from file
+    - import private keys
+    - phục hồi dữ liệu ví
+    - restore from backup file
+    - import wallet backup
+    - khôi phục ví cũ
+    - recover wallet
+    - import existing wallet
+    - restore crypto wallet
+    - phục hồi từ seed
+    - import wallet data
+    - recover from backup
+
+- intent: export_transaction_history
+  examples: |
+    - export lịch sử giao dịch
+    - xuất file lịch sử
+    - export transaction history
+    - download transaction log
+    - tải xuống lịch sử
+    - export to CSV
+    - save transaction data
+    - xuất dữ liệu giao dịch
+    - download history file
+    - export activity log
+    - tạo file báo cáo
+    - export wallet history
+    - save transaction report
+    - xuất báo cáo giao dịch
+    - download transaction report
+    - export financial data
+    - save activity history
+    - tải file lịch sử
+    - export transaction records
+    - backup transaction history
+
+- intent: set_spending_limit
+  examples: |
+    - đặt giới hạn chi tiêu
+    - set spending limit
+    - thiết lập hạn mức
+    - set transaction limit
+    - đặt limit cho giao dịch
+    - configure spending cap
+    - set daily limit
+    - đặt giới hạn hàng ngày
+    - set monthly limit
+    - thiết lập hạn mức tháng
+    - configure transaction limit
+    - set transfer limit
+    - đặt giới hạn chuyển tiền
+    - set security limit
+    - thiết lập limit bảo mật
+    - configure spending control
+    - set expense limit
+    - đặt giới hạn chi phí
+    - set wallet limit
+    - configure usage limit
